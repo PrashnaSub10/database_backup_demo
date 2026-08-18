@@ -9,10 +9,11 @@ if [ -z "$FILES" ]; then
 fi
 
 cd /repo
+
 if [ ! -d .git ]; then
   git init -b main
   git config user.name "${GIT_USER_NAME:-Backup Bot}"
-  git config user.email "${GIT_USER_EMAIL:-backup-bot@example.com}
+  git config user.email "${GIT_USER_EMAIL:-backup-bot@example.com}"
 fi
 
 if [ -n "${GITHUB_REPO_URL:-}" ]; then
