@@ -13,9 +13,9 @@ services:
       - "2222:22"
     networks:
       public_net:
-        ipv4_address: 172.28.0.2
+        ipv4_address: 172.30.0.2
       private_net:
-        ipv4_address: 172.28.0.18
+        ipv4_address: 172.30.0.18
     restart: always
 
   backup_server:
@@ -30,7 +30,7 @@ services:
       GITHUB_TOKEN: ${GITHUB_TOKEN:-}
     networks:
       private_net:
-        ipv4_address: 172.28.0.19
+        ipv4_address: 172.30.0.19
     restart: always
 
 networks:
@@ -38,13 +38,13 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.28.0.0/28
-          gateway: 172.28.0.1
+        - subnet: 172.30.0.0/28
+          gateway: 172.30.0.1
 
   private_net:
     driver: bridge
     internal: true
     ipam:
       config:
-        - subnet: 172.28.0.16/28
-          gateway: 172.28.0.17
+        - subnet: 172.30.0.16/28
+          gateway: 172.30.0.17
