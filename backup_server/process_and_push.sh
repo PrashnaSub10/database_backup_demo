@@ -12,10 +12,14 @@ cd /repo
 if [ ! -d .git ]; then
   git init -b main
   git config user.name "${GIT_USER_NAME:-Backup Bot}"
-  git config user.email "${GIT_USER_EMAIL:-backup-bot@example.com}"
+  git config user.email "${GIT_USER_EMAIL:-backup-bot@example.com}
+fi
 
-  if [ -n "${GITHUB_REPO_URL:-}" ]; then
+if [ -n "${GITHUB_REPO_URL:-}" ]; then
+  if ! git remote get-url origin > /dev/null 2>&1; then
     git remote add origin "$GITHUB_REPO_URL"
+  else
+    git remote set-url origin "$GITHUB_REPO_URL"
   fi
 fi
 
