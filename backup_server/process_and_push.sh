@@ -14,8 +14,7 @@ if [ ! -d .git ]; then
   git config user.name "${GIT_USER_NAME:-Backup Bot}"
   git config user.email "${GIT_USER_EMAIL:-backup-bot@example.com}"
 
-  if [ -n "${GITHUB_TOKEN:-}" ] && [ -n "${GITHUB_REPO_URL:-}" ]; then
-    GITHUB_REPO_URL="${GITHUB_REPO_URL//https:\/\//https:\/\/${GITHUB_TOKEN}@}"
+  if [ -n "${GITHUB_REPO_URL:-}" ]; then
     git remote add origin "$GITHUB_REPO_URL"
   fi
 fi
@@ -33,7 +32,7 @@ for FILE in $FILES; do
 
   git commit -m "Automated backup: $FILENAME" || true
 
-  if [ -n "${GITHUB_TOKEN:-}" ] && [ -n "${GITHUB_REPO_URL:-}" ]; then
+  if [ -n "${GITHUB_REPO_URL:-}" ]; then
     git pull --rebase origin main || true
     git push origin main || true
   fi
