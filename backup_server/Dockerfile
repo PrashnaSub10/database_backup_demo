@@ -1,6 +1,6 @@
 FROM alpine:3.19
 
-RUN apk add --no-cache bash openssh-server openssl git sqlite coreutils cron
+RUN apk add --no-cache bash openssh-server openssl git sqlite coreutils cronie
 
 RUN ssh-keygen -A && echo 'root:rootpass' | chpasswd
 

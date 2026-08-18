@@ -11,8 +11,9 @@ fi
 sqlite3 /app/app_db.sqlite "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT);"
 sqlite3 /app/app_db.sqlite "INSERT OR IGNORE INTO users (name) VALUES ('Alice'), ('Bob'), ('Charlie');"
 
-/usr/sbin/sshd
+printf '* * * * * root /app/backup.sh >> /var/log/cron.log 2>&1\n' > /etc/cron.d/backup
+chmod 0644 /etc/cron.d/backup
+touch /var/log/cron.log
+crond -n &
 
-# schedule a backup every minute for demo use
-printf '* * * * * /app/backup.sh >> /var/log/cron.log 2>&1\n' > /etc/crontabs/root
-crond -f -l 2
+exec /usr/sbin/sshd -D
