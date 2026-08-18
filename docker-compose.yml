@@ -24,11 +24,13 @@ services:
     container_name: backup_server
     environment:
       BACKUP_PASSPHRASE: ${BACKUP_PASSPHRASE:-SuperSecretPass123!}
-      GITHUB_REPO_URL: ${GITHUB_REPO_URL:-https://github.com/PrashnaSub10/two_servers.git}
+      GITHUB_REPO_URL: ${GITHUB_REPO_URL:-}
       GIT_USER_NAME: ${GIT_USER_NAME:-Backup Bot}
       GIT_USER_EMAIL: ${GIT_USER_EMAIL:-backup-bot@example.com}
       GITHUB_TOKEN: ${GITHUB_TOKEN:-}
     networks:
+      public_net:
+        ipv4_address: 172.30.0.3
       private_net:
         ipv4_address: 172.30.0.19
     restart: always
